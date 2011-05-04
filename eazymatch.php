@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: EazyMatch 
-Plugin URI: http://www.eazymatch.net
-Description: This Plugin integrates EazyMatch in your Wordpress website. Make sure your permalinks are turned into sef mode and save them after configuring EazyMatch in the administrator menu.
-Version: 1.0
+Plugin URI: http://wordpress.eazymatch.net
+Description: This Plugin integrates EazyMatch in your Wordpress website.
+Version: 1.2.1
 Author: EazyMatch
 Author URI: http://www.eazymatch.net
 License: GPL2
@@ -12,11 +12,10 @@ License: GPL2
 	//eazymatch session management
 	include('emol-session.php');
 	
-	
 	//set version
 	global $emol_side;
 	global $emol_db_version;
-	$emol_db_version = "1.0";
+	$emol_db_version = "1.2.1";
 	
 	global $emol_isDebug;
 	$emol_isDebug = false;
