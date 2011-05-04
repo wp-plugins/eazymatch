@@ -43,6 +43,12 @@
                 'emol_apply_success'            => get_option('emol_apply_success')
             );
 
+            //check the filter options, it will generate an error if not existing
+            if( ! get_option( 'emol_filter_options' )) {
+                add_option( 'emol_filter_options' );
+                update_option('emol_filter_options', serialize( array() ));
+            }
+            
             // See if the user has posted us some information
             // If they did, this hidden field will be set to 'Y'
             if( isset($_POST[ $hidden_field_name ]) && $_POST[ $hidden_field_name ] == 'Y' ) {
