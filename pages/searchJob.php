@@ -45,7 +45,8 @@ class EmolJobSearchPage
     */
     var $searchCriteria = array(
     'competence',
-    'free'
+    'free',
+    'location'
     );
 
     /**
@@ -66,7 +67,7 @@ class EmolJobSearchPage
         //split up the variables given
         $urlVars = explode('/',$this->page_slug);
 
-        //set the page variables	
+        //set the page variables    
         $this->page_title = get_option('emol_job_header');
 
         /**
@@ -88,7 +89,7 @@ class EmolJobSearchPage
         * that doesn't actually exist. We're gonna fill it up with
         * whatever values you want.  The content of the post will be
         * the output from your plugin.
-        */		 
+        */         
 
         /**
         * Create a fake post.
@@ -159,7 +160,7 @@ class EmolJobSearchPage
         $post->post_date = current_time('mysql');
         $post->post_date_gmt = current_time('mysql', 1);
 
-        return($post);		
+        return($post);        
     }
 
     function getContent()
@@ -174,6 +175,7 @@ class EmolJobSearchPage
         $search = array();
         $keyValue = '';
         foreach($searchAction as $searchValue){
+            
             if( ! in_array($searchValue,$this->searchCriteria) && $keyValue > ''){
                 //value
                 $search[$keyValue][] = $searchValue;
@@ -182,6 +184,17 @@ class EmolJobSearchPage
                 $search[$searchValue] = array();
                 $keyValue = $searchValue;
             }
+        }
+        
+        //format the search methods
+        if(isset($search['location'])){
+            $search['location']['range']=(int)($search['location'][1]*1000);
+            $search['location']['zipcode']=(int)($search['location'][0]);
+            emol_session::set( 'locationSearchZipcode', (int)$search['location'][0]);
+            emol_session::set( 'locationSearchRange', (int)$search['location'][1] );
+        } else {
+            emol_session::remove( 'locationSearchZipcode' );
+            emol_session::remove( 'locationSearchRange' );
         }
 
         //status
@@ -196,6 +209,7 @@ class EmolJobSearchPage
         } else {
             emol_session::remove( 'freeSearch' );
         }
+
 
         if(count($search) == ''){
             $search = array();
@@ -221,7 +235,7 @@ class EmolJobSearchPage
             //current page
             $huidige_pagina = 0;
             if( isset($_GET['page'] ) && is_numeric($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] < $aantal_paginas ) {
-                $huidige_pagina = $_GET['page'];	
+                $huidige_pagina = $_GET['page'];    
             } 
 
             //determine offset
@@ -283,7 +297,7 @@ class EmolJobSearchPage
                 }
 
                 $job_url = '/'.get_option( 'emol_job_url' ).'/'.$job['id'].'/'.eazymatch_friendly_seo_string($job['name']).'/';
-                $apply_url 	= '/'.get_option( 'emol_apply_url' ).'/'.$job['id'].'/'.eazymatch_friendly_seo_string($job['name']).'/';
+                $apply_url     = '/'.get_option( 'emol_apply_url' ).'/'.$job['id'].'/'.eazymatch_friendly_seo_string($job['name']).'/';
 
                 $searchHtml .= $img;
                 $searchHtml .= '<div class="eazymatch_job_title"><a href="'.$job_url.'">'.htmlspecialchars_decode($job['name']).'</a></div>';

@@ -3,7 +3,7 @@ Contributors: EazyMatch Development Team
 Tags: eazymatch, job, jobboard, publish jobs
 Requires at least: 3.0.0
 Tested up to: 3.0.1
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 
 Plugin to enable EazyMatch functionality in your website. EazyMatch is a SOAP based service for recruitment company's
 
@@ -46,6 +46,8 @@ ONLY current languague support is Dutch and English!
 * Version 1.2.2
     * Updated some naming and classnames in html
     * improved information / readme
+* Version 1.2.3
+    * Added searching jobs on location / range
 
 == Upgrade Notice ==
 
@@ -59,6 +61,9 @@ ONLY current languague support is Dutch and English!
 * Update recomended.
 
 = 1.2.2 =
+* Update required.
+
+= 1.2.3 =
 * Update required.
 
 == Screenshots ==
