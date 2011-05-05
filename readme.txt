@@ -3,7 +3,7 @@ Contributors: EazyMatch Development Team
 Tags: eazymatch, job, jobboard, publish jobs
 Requires at least: 3.0.0
 Tested up to: 3.0.1
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 Plugin to enable EazyMatch functionality in your website. EazyMatch is a SOAP based service for recruitment company's
 
@@ -21,6 +21,7 @@ ONLY current languague support is Dutch and English!
 2. Activate the plugin from the admin interface
 3. Setup your EazyMatch key and secret credentials in the Admin menu
 4. Define what url's you want to use and setup your parameters
+5. use shorttags = [eazymatch view="jobs"] / [eazymatch view="cv"]
     
 
 == Frequently Asked Questions ==
@@ -42,7 +43,9 @@ ONLY current languague support is Dutch and English!
     * job admin menu bug fixed on first load: filter options where not available
 * Version 1.2.1
     * Application translated in English
-
+* Version 1.2.2
+    * Updated some naming and classnames in html
+    * improved information / readme
 
 == Upgrade Notice ==
 
@@ -54,6 +57,9 @@ ONLY current languague support is Dutch and English!
 
 = 1.2.1 =
 * Update recomended.
+
+= 1.2.2 =
+* Update required.
 
 == Screenshots ==
 no screenshots yet

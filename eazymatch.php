@@ -3,7 +3,7 @@
 Plugin Name: EazyMatch 
 Plugin URI: http://wordpress.eazymatch.net
 Description: This Plugin integrates EazyMatch in your Wordpress website.
-Version: 1.2.1
+Version: 1.2.2
 Author: EazyMatch
 Author URI: http://www.eazymatch.net
 License: GPL2
@@ -15,7 +15,7 @@ License: GPL2
 	//set version
 	global $emol_side;
 	global $emol_db_version;
-	$emol_db_version = "1.2.1";
+	$emol_db_version = "1.2.2";
 	
 	global $emol_isDebug;
 	$emol_isDebug = false;
