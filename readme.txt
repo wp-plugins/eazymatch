@@ -1,11 +1,15 @@
 === EazyMatch ===
 Contributors: eazymatch
+Plugin Name: Eazymatch
+Plugin URI: http://wordpress.org/extend/plugins/eazymatch/
+Author: EazyMatch
+Author URI: http://www.eazymatch.net
 Tags: eazymatch, job, jobboard, recruitment
-Requires at least: 3.0.0
+Requires at least: 3.0
 Tested up to: 3.1.2
-Stable tag: 1.3
+Stable tag: 1.3.1
 
-Plugin to enable an EazyMatch frontent on your website. EazyMatch is a SOAP based service for recruitment company's
+Plugin to enable an EazyMatch frontent on your website. EazyMatch is a SOAP based service for recruitment companys
 
 == Description ==
 
@@ -38,6 +42,9 @@ The currently supported languages are Dutch and English
  
 == Changelog ==
 
+= 1.3.1 =
+* Improved readme format
+
 = 1.3 =
 * Release focused on better usability, customizability and seo optimizing
 * added labels to apply form
@@ -63,6 +70,9 @@ The currently supported languages are Dutch and English
 * First public release.
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+* Update optional, improved readme format
 
 = 1.3 =
 * Update recommended, style of plugins integrate better in wordpress
