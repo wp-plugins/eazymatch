@@ -9,8 +9,7 @@
         }
 
         /** @see WP_Widget::widget */
-        function widget($args, $instance) {        
-
+        function widget($args, $instance) {      
             //get arguments
             extract( $args );
 
@@ -55,19 +54,26 @@
             if($total > 0){
                 $text  ='<ul>';
                 foreach($jobs as $job){
-
+					$i++;
                     $job_url     = '/'.get_option( 'emol_job_url' ).'/'.$job['id'].'/'.eazymatch_friendly_seo_string($job['name']).'/';
                     $apply_url     = '/'.get_option( 'emol_apply_url' ).'/'.$job['id'].'/'.eazymatch_friendly_seo_string($job['name']).'/';
                     
-                    $text .= '<li><a href="'.$job_url.'">'.$job['name'].'</a>';
+                    $text .= '<li class="' . ( $i % 2 == 0 ? 'even':'odd' ) . '"><a href="'.$job_url.'">'.$job['name'].'</a>';
                     
-                    if($descVisible == 1) $text .= '<div class="emol_top5jobs_description">'.substr($job['description'],0,64).'...</div>';
-                    if($regioVisible == 1 && isset($job['Address']['Region'])) $text .= '<div class="emol_top5jobs_region">'.$job['Address']['Region']['name'].'</div>';
+                    if( $descVisible == 1 && !empty($job['description']) ) $text .= '<div class="emol_top5jobs_description">'.substr($job['description'],0,64).'...</div>';
+                    if( $regioVisible == 1 && isset($job['Address']['Region'])) $text .= '<div class="emol_top5jobs_region">'.$job['Address']['Region']['name'].'</div>';
                     
                     $text .= '<div class="emol_top5jobs_apply"><a href="'.$apply_url.'">'.EMOL_JOBSEARCH_APPLY.'</a></div></li>';
                 }
+                echo '</ul>';
                 
-                $text .= '</ul><div id="emol_top5jobs_findmore"><a href="/'.get_option( 'emol_job_search_url' ).'/all/">'.EMOL_JOBSEARCH_MORE.'</a></div>';
+                
+                $text .= '
+                <div id="emol_top5jobs_findmore">
+                	<div class="emol-submit-wrapper">
+            			<a href="/'.get_option( 'emol_job_search_url' ).'/all/">'.EMOL_JOBSEARCH_MORE.'</a>
+			        </div>
+                </div>';
 
             } else {
                 $text = '<ul><li><span>'.get_option( 'emol_job_no_result' ).'</span></li></ul>';

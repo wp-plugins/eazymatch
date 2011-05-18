@@ -245,9 +245,9 @@ class EmolJobSearchPage
             $jobs = $ws->siteSearch($search,$offset,$items_per_pagina);
 
             $nav = '<table class="emol-pagination-table"><tr>';
-            $nav .= '<td class="emol-pagnation"><a href="/'.$this->page_slug.'"> <<< </a></td>';
+            $nav .= '<td class="emol-pagnation"><a href="/'.$this->page_slug.'"> &lt;&lt;&lt; </a></td>';
             if($aantal_paginas > 1)
-            $nav .= '<td class="emol-pagnation"><a href="/'.$this->page_slug.'/?page='.($huidige_pagina-1).'"> << </a></td>';
+            $nav .= '<td class="emol-pagnation"><a href="/'.$this->page_slug.'/?page='.($huidige_pagina-1).'"> &lt;&lt; </a></td>';
 
 
             for($i = 0; $i < $aantal_paginas; $i++) {
@@ -272,9 +272,9 @@ class EmolJobSearchPage
 
             }
             if($huidige_pagina + 1 != $aantal_paginas)
-                $nav .= '<td class="emol-pagnation"><a href="/'.$this->page_slug.'/?page='.($huidige_pagina + 1).'">>></a></td>';
+                $nav .= '<td class="emol-pagnation"><a href="/'.$this->page_slug.'/?page='.($huidige_pagina + 1).'"> &gt;&gt; </a></td>';
 
-            $nav .= '<td class="emol-pagnation last"><a href="/'.$this->page_slug.'/?page='.($aantal_paginas-1).'"> >>> </a></span></td>';
+            $nav .= '<td class="emol-pagnation last"><a href="/'.$this->page_slug.'/?page='.($aantal_paginas-1).'"> &gt;&gt;&gt; </a></span></td>';
 
             $nav .='</tr></table>';
 
@@ -303,7 +303,7 @@ class EmolJobSearchPage
                 $searchHtml .= '<div class="eazymatch_job_title"><a href="'.$job_url.'">'.htmlspecialchars_decode($job['name']).'</a></div>';
                 if($descVisible == 1) $searchHtml .= '<div class="emol-overview-text">'.($job['description']).'</div>';
                 if($regioVisible == 1 && isset($job['Address']['Region'])) $searchHtml .= '<div class="eazymatch_job_region">'.$job['Address']['Region']['name'].'</div>';
-                $searchHtml .= '<div class="eazymatch_job_toolbar"><a href="'.$job_url.'">'.EMOL_SEARCH_READMORE.'</a> | <a href="'.$apply_url.'">'.EMOL_JOBSEARCH_APPLY.'</a> </div>';
+                $searchHtml .= '<div class="eazymatch_job_toolbar"><a href="'.$apply_url.'">'.EMOL_JOBSEARCH_APPLY.'</a> | <a href="'.$job_url.'">'.EMOL_SEARCH_READMORE.'</a></div>';
                 $searchHtml .= '<div class="eazymatch_result_seperator"></div>';
 
             }

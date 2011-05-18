@@ -39,7 +39,7 @@ class emol_Level2Listboxes {
 		foreach($treeArray as $rootTree){
 			foreach($rootTree['children'] as $item){
                 //listbox
-                $return .= '<h3>'.$item['name'].'</h3>';
+                $return .= '<label for="'.$item['id'].'">'.$item['name'].'</label>';
                 $return .= '<select id="'.$item['id'].'" class="emol-search-competence">';
                 $return .= '<option value="">&nbsp;</option>';
                 
@@ -54,7 +54,6 @@ class emol_Level2Listboxes {
                 $return .= '</select>';
 		    }
 	    }
-        $return .= '<hr class="emol-hr"><div align="right"><button class="emol-search-button" onclick="emolSearch(\'' . $this->side . '\');">'.EMOL_WIDGET_SEARCH.'</button></div>';
         $this->lists = $return;
     }
 }

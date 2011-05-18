@@ -247,6 +247,9 @@ class EmolApplicantAccountPage
 	* creates the fake content
 	*/
 	function getMatchContent(){
+    	// prepare client resources
+        emol_require::validation();
+        emol_require::jqueryUi();
 		
 		//get the data of this logged on person
 		$app  	= $this->wsApp->getSummaryPrivate();
@@ -333,7 +336,10 @@ class EmolApplicantAccountPage
 	* creates the fake content
 	*/
 	function getApplicationsContent(){
-		
+    	// prepare client resources
+        emol_require::validation();
+        emol_require::jqueryUi();
+        
 		$this->wsApp = $this->emolApi->get('mediation');
 		$med = $this->wsApp->byApplicantPrivate();
 		
@@ -373,7 +379,10 @@ class EmolApplicantAccountPage
 	* creates the fake content
 	*/
 	function getNAWContent(){
-
+    	// prepare client resources
+        emol_require::validation();
+        emol_require::jqueryUi();
+        
 		//get the data of this logged on person
 		$app  	= $this->wsApp->getSummaryPrivate();
 		

@@ -234,7 +234,10 @@ class EmolCompanyAccountPage
 	* creates the fake content
 	*/
 	function getNAWContent(){
-
+    	// prepare client resources
+        emol_require::validation();
+        emol_require::jqueryUi();
+        
 		//get the data of this logged on person
 		$comp  	= $this->ws->getSummaryPrivateCompany();
 		$list  	= $this->emolApi->get('list');
@@ -465,7 +468,10 @@ class EmolCompanyAccountPage
 	* creates the fake content
 	*/
 	function getJobContent(){
-
+    	// prepare client resources
+        emol_require::validation();
+        emol_require::jqueryUi();
+        
         try {
             //get the data of this logged on person
             $comp      = $this->ws->getSummaryPrivateCompany();
@@ -535,6 +541,10 @@ class EmolCompanyAccountPage
 	* creates the fake content
 	*/
 	function getApplicationsContent(){
+    	// prepare client resources
+        emol_require::validation();
+        emol_require::jqueryUi();
+        
 		try {
 			$this->wsApp = $this->emolApi->get('mediation');
 			$med = $this->wsApp->byCompanyPrivate();

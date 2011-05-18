@@ -6,8 +6,8 @@
 * @return EazyConnect
 */
 function eazymatch_connect(){
-	$conectionManager =  EazyConnectManager::getInstance();
-	return $conectionManager->getConnection();
+	$connectionManager =  EazyConnectManager::getInstance();
+	return $connectionManager->getConnection();
 }
 
 Class EazyConnectManager {
@@ -17,18 +17,12 @@ Class EazyConnectManager {
 	private $secret;
 	private $connection = null;
 
-	//private $sessionHashName    = 'loginHash';
-	//private $sessionOptionName  = 'emol_session_hash';
-
 	public function __construct(){
 		$this->instance = get_option( 'emol_instance' );
 		$this->key 		= get_option( 'emol_key' );
 		$this->secret 	= get_option( 'emol_secret' );
-	
-		//$this->resetConnection();
 	}
 
-	// roep instantie van singleton aan
 	/**
 	* @return EazyConnectManager
 	*/
@@ -40,7 +34,6 @@ Class EazyConnectManager {
 	}
 
 	public function getConnection(){
-		//get_option
 		if ( $this->connection == null )
 			$this->reconnect();
 
@@ -48,6 +41,14 @@ Class EazyConnectManager {
 	}
 
 	public function reconnect(){
+		// check if apiKey is present and instanceName is not empty
+		if ( strlen( $this->key ) < 6 && strlen( $this->instance ) < 4 && strlen( $this->secret ) < 4  ){
+			if ( is_admin() ){
+				eazymatch_trow_error('Eazymatch connection settings incorrect.');
+			}
+			return null;
+		}
+		
 		if( emol_session::exists( 'api_hash' ) ){
 			$apiKey = emol_session::get( 'api_hash' );
 		} else {
@@ -206,9 +207,9 @@ Class EazyConnectProxy {
 		$this->instanceName 	= $instanceName;
 		
 		$this->serviceName 		= $serviceName;
-		$this->serviceUrl		= $this->debug ? 'http://vincent.dev.eazymatch.net/EazyCore' : 'https://core.eazymatch.net:443';
+		$this->serviceUrl		= 'https://core.eazymatch.net:443';
 
-		$this->setKey( $apiKey );
+		$this->apiKey = $apiKey;
 	}
 
 	public function setKey( $key ){
@@ -234,6 +235,19 @@ Class EazyConnectProxy {
 	}
 
 	public function __call($name, $argu){
+		// check if apikey is created
+		if ( !is_object( $this->service ) ){
+			$this->setKey( $this->apiKey );
+		}
+		
+		// check if apiKey is present and instanceName is not empty
+		if ( strlen( $this->apiKey ) < 6 && strlen( $this->instanceName ) < 4 ){
+			if ( is_admin() ){
+				eazymatch_trow_error('Eazymatch connection settings incorrect.');
+			}
+			return null;
+		}
+		
 		try {
 			$response = call_user_func_array(array(&$this->service, $name), $argu);
 		} catch ( SoapFault $e ) {

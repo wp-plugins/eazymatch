@@ -6,60 +6,53 @@
 * @return mixed
 */
 function eazymatch_friendly_seo_string($input){
-    $input = str_replace("-"," ",$input);
-    $return = trim(ereg_replace(' +',' ',preg_replace('/[^a-zA-Z0-9\s]/','',strtolower($input))));
-    $return = str_replace(' ','-',$return);
-    if($return == '') $return = '-';
-    return $return;
+	$input = str_replace("-"," ",$input);
+	$return = trim(ereg_replace(' +',' ',preg_replace('/[^a-zA-Z0-9\s]/','',strtolower($input))));
+	$return = str_replace(' ','-',$return);
+	if($return == '') $return = '-';
+	return $return;
 }
 
 //error handeling
 function eazymatch_trow_error($msg='EAZYMATCH ERROR'){
-    //session_start();
-    @session_destroy();
-    echo "<div class=\"emol-error\">".$msg."</div>";
+	//session_start();
+	@session_destroy();
+	echo "<div class=\"emol-error\">".$msg."</div>";
 }
 
 //debugging
 function emol_debug($data){
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";
+	echo "<pre>";
+	print_r($data);
+	echo "</pre>";
 }
 
 /**
-* include scripts / javascript / css for eazymatch
+* include eazymatch rssfeed in the header
+* 
 */
-wp_enqueue_script("jquery");
 function eazymatch_header_scripts() {
-    if( ! get_option( 'emol_jquery_ui_skin' ) ){
-        add_option( 'emol_jquery_ui_skin' , 'base');
-    }
-    echo "\n<script type=\"text/javascript\" src=\"". get_bloginfo( 'wpurl') ."/wp-content/plugins/eazymatch/scripts/validation.js\"></script>";
-    echo "\n<script type=\"text/javascript\" src=\"". get_bloginfo( 'wpurl') ."/wp-content/plugins/eazymatch/scripts/emol.js\"></script>";
-    echo "\n<link href=\"". get_bloginfo( 'wpurl') ."/em-jobfeed/\" rel=\"alternate\" type=\"application/rss+xml\" title=\"Jobs - ".get_bloginfo( 'title')." - RSS 2.0\" />";
-    
-    echo PHP_EOL.'<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/'.get_option( 'emol_jquery_ui_skin' ).'/jquery-ui.css" type="text/css" media="all" />';    
-    echo PHP_EOL.'<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/jquery-ui.min.js" type="text/javascript"></script>';    
+	echo "\n<link href=\"". get_bloginfo( 'wpurl') ."/em-jobfeed/\" rel=\"alternate\" type=\"application/rss+xml\" title=\"Jobs - ".get_bloginfo( 'title')." - RSS 2.0\" />";
 }
 add_action('wp_head', 'eazymatch_header_scripts');
 
+
 // eazymatch post object handling
 $emol_post_obj = new emol_array( $_POST );
-    
+	
 function emol_post( $keyName ){
-    global $emol_post_obj;
-    return $emol_post_obj->get( $keyName );
+	global $emol_post_obj;
+	return $emol_post_obj->get( $keyName );
 }
 
 function emol_post_exists( $keyName ){
-    global $emol_post_obj;
-    return $emol_post_obj->exists( $keyName );
+	global $emol_post_obj;
+	return $emol_post_obj->exists( $keyName );
 }
 
 function emol_post_set( $keyName, $value ){
-    global $emol_post_obj;
-    return $emol_post_obj->set( $keyName, $value );
+	global $emol_post_obj;
+	return $emol_post_obj->set( $keyName, $value );
 }
 
 
@@ -88,35 +81,34 @@ function emol_post_set( $keyName, $value ){
 * @author Daniel <daniel (at) danielsmedegaardbuus (dot) dk>
 * @author Gabriel Sobrinho <gabriel (dot) sobrinho (at) gmail (dot) com>
 */
-function array_merge_recursive_distinct ( array &$array1, array &$array2 )
-{
-    $merged = $array1;
+function array_merge_recursive_distinct ( array &$array1, array &$array2 ) {
+	$merged = $array1;
 
-    foreach ( $array2 as $key => &$value )
-    {
-        if ( is_array ( $value ) && isset ( $merged [$key] ) && is_array ( $merged [$key] ) )
-        {
-            $merged [$key] = array_merge_recursive_distinct ( $merged [$key], $value );
-        }
-        else
-        {
-            $merged [$key] = $value;
-        }
-    }
+	foreach ( $array2 as $key => &$value )
+	{
+		if ( is_array ( $value ) && isset ( $merged [$key] ) && is_array ( $merged [$key] ) )
+		{
+			$merged [$key] = array_merge_recursive_distinct ( $merged [$key], $value );
+		}
+		else
+		{
+			$merged [$key] = $value;
+		}
+	}
 
-    return $merged;
+	return $merged;
 }
 
 /*** DEBUGGING ***/
-function eazymatch_start_debug(){
-    ob_clean();
-    echo '<B>'.date("H:i:s").'</B><br>';
-    echo "<div class=\"emol-error\">";
-    echo "<pre>";
+function eazymatch_start_debug() {
+	ob_clean();
+	echo '<B>'.date("H:i:s").'</B><br>';
+	echo "<div class=\"emol-error\">";
+	echo "<pre>";
 }
 
-function eazymatch_end_debug(){
-    echo "</pre></div>";
-    echo '<B>'.date("H:i:s").'</B>';
-    exit();
+function eazymatch_end_debug() {
+	echo "</pre></div>";
+	echo '<B>'.date("H:i:s").'</B>';
+	exit();
 }

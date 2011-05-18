@@ -316,6 +316,12 @@ class EmolApplyPage
     * creates the fake content
     */
     function getContent(){
+    	// remove auto line breaks
+		remove_filter('the_content', 'wpautop');
+    	
+    	// prepare client resources
+        emol_require::validation();
+        emol_require::jqueryUi();
         
         $linkedInrequest = (get_query_var('emolrequestid'));
         $titleCV = '';
@@ -370,56 +376,61 @@ class EmolApplyPage
             if( ! emol_session::isValidId( 'applicant_id' ) ){
                 
                 //make login widget
-                
                 $applyHtml .= '
                 <tr>
-                    <td class="emol-form-td"></td>
-                    <td class="emol-form-td">
-                    <span class="connect-linked-in-text">'.EMOL_APPLY_LINKEDIN.'</span>
-                    <img src="https://linkedin.eazymatch.net/default-login.png" class="emol-login-logo" onclick="jQuery(\'#emolLoginDialog\').dialog();" />
-                    <a href="https://linkedin.eazymatch.net/?refer='.$url.'&amp;instance='.$this->emolApi->instanceName.'">
-                    <img src="https://linkedin.eazymatch.net/connect-to-linkedin.png" class="emol-linkedin-logo" />
-                    </a><strong>'.$titleCV.'</strong></td>
+                    <td class="emol-form-td" colspan="2">
+	                    <img src="https://linkedin.eazymatch.net/default-login.png" class="emol-login-logo" onclick="jQuery(\'#emolLoginDialog\').dialog();" />
+	                    <a href="https://linkedin.eazymatch.net/?refer='.$url.'&amp;instance='.$this->emolApi->instanceName.'">
+	                    <img src="https://linkedin.eazymatch.net/connect-to-linkedin.png" class="emol-linkedin-logo" />
+	                    </a><strong>'.$titleCV.'</strong>
+                    </td>
                 </tr>
+                
                 <tr>
                 <td class="emol-form-td">
-                '.EMOL_GENDER.'
+                	'.EMOL_GENDER.'
                 </td>
                 <td>
-                <input type="radio" class="emol-radio-input" name="gender" value="m" checked="checked" /> '.EMOL_MALE.' <br />
-                <input type="radio" class="emol-radio-input" name="gender" value="f" /> '.EMOL_FEMALE.'
-                </td>
-                </tr>
-                <tr>
-                <td>
-                '.EMOL_FIRSTNAME.'
-                </td>
-                <td>
-                <input type="text" class="emol-text-input" name="firstname" id="emol-firstname" value="'.$data['first-name'].'" />
+	                <input type="radio" class="emol-radio-input" name="gender" value="m" checked="checked" id="emol-gender-male" />  <label for="emol-gender-male">'.EMOL_MALE.'</label>
+	                <input type="radio" class="emol-radio-input" name="gender" value="f" id="emol-gender-female" />  <label for="emol-gender-female">'.EMOL_FEMALE.'</label>
                 </td>
                 </tr>
+                
                 <tr>
-                <td>
-                '.EMOL_MIDDLENAME.' &amp; '.EMOL_LASTNAME.'
-                </td>
-                <td>
-                <input type="text" class="emol-text-input emol-small " name="middlename" id="emol-middlename" /> 
-                <input type="text" class="emol-text-input"  value="'.$data['last-name'].'" name="lastname" id="emol-lastname" />
-                </td>
+	                <td>
+	                	<label for="emol-firstname">'.EMOL_FIRSTNAME.'</label>
+	                </td>
+	                <td>
+	                	<input type="text" class="emol-text-input" name="firstname" id="emol-firstname" value="'.$data['first-name'].'" />
+	                </td>
                 </tr>
+                
                 <tr>
-                <td>
-                '.EMOL_ADDRESS.'  + '.EMOL_HOUSENUMBER.'  + '.EMOL_EXTENSION.'
-                </td>
-                <td>
-                <input type="text" class="emol-text-input" id="emol-address" name="address[1][street]" /> 
-                <input type="text" class="emol-text-input emol-small validate[required,custom[onlyNumber],length[0,5]]" name="address[1][housenumber]" id="emol-housenumber" /> 
-                <input type="text" class="emol-text-input emol-small" name="address[1][extension]" id="emol-extension" />
-                </td>
+	                <td>
+                		<label for="emol-middlename">'.EMOL_MIDDLENAME.' &amp;</label> <label for="emol-lastname">'.EMOL_LASTNAME.'</label>
+	                </td>
+	                <td>
+		                <input type="text" class="emol-text-input emol-small " name="middlename" id="emol-middlename" /> 
+		                <input type="text" class="emol-text-input"  value="'.$data['last-name'].'" name="lastname" id="emol-lastname" />
+	                </td>
                 </tr>
+                
+                <tr>
+	                <td>
+	                	<label for="emol-address">'.EMOL_ADDRESS.' + </label>
+	                	<label for="emol-housenumber">'.EMOL_HOUSENUMBER.'  + </label>
+	                	<label for="emol-extension">'.EMOL_EXTENSION.'</label>
+	                </td>
+	                <td>
+		                <input type="text" class="emol-text-input" id="emol-address" name="address[1][street]" /> 
+		                <input type="text" class="emol-text-input emol-small validate[required,custom[onlyNumber],length[0,5]]" name="address[1][housenumber]" id="emol-housenumber" /> 
+		                <input type="text" class="emol-text-input emol-small" name="address[1][extension]" id="emol-extension" />
+	                </td>
+                </tr>
+                
                 <tr>
                 <td>
-                '.EMOL_ZIPCODE.'
+                <label for="emol-zipcode">'.EMOL_ZIPCODE.'</label>
                 </td>
                 <td>
                 <input type="text" class="emol-text-input" name="address[1][zipcode]" id="emol-zipcode" />
@@ -427,7 +438,7 @@ class EmolApplyPage
                 </tr>
                 <tr>
                 <td>
-                '.EMOL_CITY.'
+                <label for="emol-city">'.EMOL_CITY.'</label>
                 </td>
                 <td>
                 <input type="text" class="emol-text-input" value="'.$data['location']['name'].'"  name="address[1][city]" id="emol-city" />
@@ -435,7 +446,7 @@ class EmolApplyPage
                 </tr>
                 <tr>
                 <td>
-                '.EMOL_PHONE.'
+                <label for="emol-phonenumber">'.EMOL_PHONE.'</label>
                 </td>
                 <td>
                 <input type="text" class="emol-text-input" name="phonenumber" id="emol-phonenumber" />
@@ -443,7 +454,7 @@ class EmolApplyPage
                 </tr>
                 <tr>
                 <td>
-                '.EMOL_EMAIL.'
+                <label for="emol-email">'.EMOL_EMAIL.'</label>
                 </td>
                 <td>
                 <input type="text" class="emol-text-input" name="email" id="emol-email" />
@@ -451,7 +462,7 @@ class EmolApplyPage
                 </tr>
                 <tr>
                 <td>
-                '.EMOL_APPLY_CV.'
+                <label for="emol-cv">'.EMOL_APPLY_CV.'</label>
                 </td>
                 <td>
                 <input type="file" class="emol-text-input emol-file" name="cv" id="emol-cv" />
@@ -459,7 +470,7 @@ class EmolApplyPage
                 </tr>
                 <tr>
                 <td>
-                '.EMOL_APPLY_PICTURE.'
+                <label for="emol-picture">'.EMOL_APPLY_PICTURE.'</label>
                 </td>
                 <td>
                 <input type="file" class="emol-text-input emol-file" name="picture" id="emol-picture" />
@@ -533,7 +544,7 @@ class EmolApplyPage
         </table>
         </form>
         </div>';
-
+        
         //return some html
         return $applyHtml;
     }

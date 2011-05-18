@@ -110,7 +110,7 @@ class EmolJobPage
 	 */
 	function createPost()
 	{
-	
+		
 		/**
 		 * What we are going to do here, is create a fake post.  A post
 		 * that doesn't actually exist. We're gonna fill it up with
@@ -191,6 +191,7 @@ class EmolJobPage
 	}
 	
 	function getContent(){
+		
 		//$jobHtml = '<h2 class="emol-job-heading">'.$this->job['name'].'</h2>';
         if( ! isset( $this->job['id'] )  ){
             return 'Not Found';
