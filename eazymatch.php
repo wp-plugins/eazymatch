@@ -3,10 +3,26 @@
 Plugin Name: EazyMatch 
 Plugin URI: http://wordpress.eazymatch.net
 Description: This Plugin integrates EazyMatch in your Wordpress website.
-Version: 1.2.3
+Version: 1.3
 Author: EazyMatch
 Author URI: http://www.eazymatch.net
 License: GPL2
+*/
+
+/*  Copyright 20011  EazyMatch  (email : vincent@inforvision.nl )
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License, version 2, as 
+    published by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 	
 	//eazymatch session management
@@ -15,7 +31,7 @@ License: GPL2
 	//set version
 	global $emol_side;
 	global $emol_db_version;
-	$emol_db_version = "1.2.3";
+	$emol_db_version = "1.2.2";
 	
 	global $emol_isDebug;
 	$emol_isDebug = false;
@@ -30,25 +46,29 @@ License: GPL2
         eazymatch_trow_error('Language file '. get_bloginfo('language').'.php' . ' missing.');
     }
 	
-	//eazymatch array manager
+	// eazymatch array manager
 	include('emol-array.php');
 	
-	//eazymatch specific functions
+	// eazymatch script/css manager
+	include('emol-require.php');
+	emol_require::basic();
+	
+	// eazymatch specific functions
 	include('emol-functions.php');
 	
-	//the install/d-install script
+	// the install/d-install script
 	include('emol-install.php');
 	
-	//include the admin menu
+	// include the admin menu
 	include('emol-admin.php');
 	
-	//include function and class for eazymatch 3.0 SOAP connection
+	// include function and class for eazymatch 3.0 SOAP connection
 	include('emol-connect.php');
 
-	//rewrite urls for jobs etc
+	// rewrite urls for jobs etc
 	include('emol-rewrite.php');
 	
-	//instantiate shorttags
+	// instantiate shorttags
 	include('emol-shorttags.php');
 	
 	/**

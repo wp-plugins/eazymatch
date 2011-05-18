@@ -4,34 +4,37 @@ EazyMatch functions
 (function( window, $, undefined ){
 
     $(function() {
-        $("#emol-apply-form").validate({
-            submitHandler:function(form) {
-                form.submit();
-            },
-            rules: {
-                firstname: "required",        // simple rule, converted to {required:true}
-                lastname: "required",        // simple rule, converted to {required:true}
-                email: {                // compound rule
-                    required: true,
-                    email: true
-                }
-            },
-            messages: {
-                comment: "Please enter a value."
-            }
-        });
+    	// the validator is included, add rules
+    	if ( typeof $.validator != 'undefined' ){
+		    $.validator.addMethod(
+			     "selectNone",
+			    function(value, element) {
+			        if (element.value == "none") {
+			            return false;
+			        }
+			        else return true;
+			    },
+			    "Please select an option."
+		    );
+    		
+	        $("#emol-apply-form").validate({
+	            submitHandler:function(form) {
+	                form.submit();
+	            },
+	            rules: {
+	                firstname: "required",        // simple rule, converted to {required:true}
+	                lastname: "required",        // simple rule, converted to {required:true}
+	                email: {                // compound rule
+	                    required: true,
+	                    email: true
+	                }
+	            },
+	            messages: {
+	                comment: "Please enter a value."
+	            }
+	        });
+		}
     });
-
-    $.validator.addMethod(
-     "selectNone",
-    function(value, element) {
-        if (element.value == "none") {
-            return false;
-        }
-        else return true;
-    },
-    "Please select an option."
-    );
 
     //called from jobsearchwidget
     window.emolFreeSearch = function (baseSearchUrl){

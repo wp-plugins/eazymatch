@@ -1,70 +1,80 @@
 === EazyMatch ===
-Contributors: EazyMatch Development Team
-Tags: eazymatch, job, jobboard, publish jobs
+Contributors: eazymatch
+Tags: eazymatch, job, jobboard, recruitment
 Requires at least: 3.0.0
-Tested up to: 3.0.1
-Stable tag: 1.2.3
+Tested up to: 3.1.2
+Stable tag: 1.3
 
-Plugin to enable EazyMatch functionality in your website. EazyMatch is a SOAP based service for recruitment company's
+Plugin to enable an EazyMatch frontent on your website. EazyMatch is a SOAP based service for recruitment company's
 
 == Description ==
-This plugin allows you to publish your jobs and resume's from your EazyMatch system. Before you can use this plugin you need a licence for EazyMatch. You can become customer on http://www.eazymatch.net. Documentation of the plugin can be found on http://wordpress.eazymatch.net
+
+This plugin allows you to publish jobs and resume's from an EazyMatch instance. Before you can use this plugin you need an EazyMatch licence. You can become customer on http://www.eazymatch.net. Documentation of the plugin can be found on http://wordpress.eazymatch.net
 
 It will give you widgets for your latest jobs, search engine to browse your jobs and resume's and login functionality for your visitors to update their profiles. You also have short-tags to implement short lists of your jobs.
 
-ONLY current languague support is Dutch and English!
-
+The currently supported languages are Dutch and English
 
 == Installation ==
 
 1. Place the folder containing this file into the plugins folder
 2. Activate the plugin from the admin interface
-3. Setup your EazyMatch key and secret credentials in the Admin menu
+3. Setup your EazyMatch instance, connection key and secret credentials in the Admin menu, you are able to request an key via http://www.eazymatch.net
 4. Define what url's you want to use and setup your parameters
-5. use shorttags = [eazymatch view="jobs"] / [eazymatch view="cv"]
-    
+5. Create a page and add the shortcode [eazymatch view="jobs"] for an job overview and [eazymatch view="cv"] for an resume overview
+6. Mark applicants/jobs as published in the EazyFrontend to allow publication via this plugins
+7. enjoy !
 
 == Frequently Asked Questions ==
 
-* How do i get a licence / key / secret?
+= How do i get a licence / key / secret? =
  Contact us at http://www.eazymatch.net
  
-* What does it cost?
- See http://www.eazymatch.nl/tarieven
-
+ == Screenshots ==
+ 
+1. Job overview, marked as published in the EazyFrontend
+2. Search widget
+3. Top 5 jobs widget
  
 == Changelog ==
 
-* Version 1.0
-    * First public release.
-* Version 1.1
-    * Better error handeling.
-    * Improved information. that is what you are reading
-    * job admin menu bug fixed on first load: filter options where not available
-* Version 1.2.1
-    * Application translated in English
-* Version 1.2.2
-    * Updated some naming and classnames in html
-    * improved information / readme
-* Version 1.2.3
-    * Added searching jobs on location / range
+= 1.3 =
+* Release focused on better usability, customizability and seo optimizing
+* added labels to apply form
+* plugin checks if instance/key/secret is present
+* style/script files are only included on required pages
+* default sample styling is now inluded
+* improved readme file
+* added licence file
+    
+= 1.2.2 =
+* Updated some naming and classnames in html
+* improved information / readme
+    
+= 1.2.1 =
+* Application translated in English
+    
+= 1.1 =
+* Better error handeling.
+* Improved information. that is what you are reading
+* job admin menu bug fixed on first load: filter options where not available
+    
+= 1.0 =
+* First public release.
 
 == Upgrade Notice ==
 
-= 1.0 =
+= 1.3 =
+* Update recommended, style of plugins integrate better in wordpress
+
+= 1.2.2 =
+* Update required.
+
+= 1.2.1 =
 * Update recomended.
 
 = 1.1 =
 * Bugs Fixed. Update required.
 
-= 1.2.1 =
+= 1.0 =
 * Update recomended.
-
-= 1.2.2 =
-* Update required.
-
-= 1.2.3 =
-* Update required.
-
-== Screenshots ==
-no screenshots yet

@@ -185,6 +185,7 @@ class EmolCvPage
     */
 	function getContent()
 	{
+		
 		$img = '';
 		if( isset($this->cv['Person']['Picture']) && $this->cv['Person']['Picture']['content'] > '' && get_option('emol_cv_search_picture') == 1){
 			$img = '<div class="emol-cv-result-picture"><img src="data:image/png;base64,'.$this->cv['Person']['Picture']['content'].'" /></div>';

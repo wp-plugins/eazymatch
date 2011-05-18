@@ -322,6 +322,10 @@ class EmolReactPage
 	* creates the fake content
 	*/
 	function getContent(){
+    	// prepare client resources
+        emol_require::validation();
+        emol_require::jqueryUi();
+		
 		//the react form
 		$reactHtml = '
 		<div id="emol-form-div">

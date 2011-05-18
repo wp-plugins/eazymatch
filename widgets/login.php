@@ -10,8 +10,7 @@
         }
 
         /** @see WP_Widget::widget */
-        function widget($args, $instance) {		
-
+        function widget($args, $instance) {	
             //get arguments
             extract( $args );
 
@@ -84,11 +83,11 @@
             } else {
 
                 echo "<form method=\"post\" action=\"/".get_option( 'emol_account_url' )."/login/\">";
-                echo "<input type=hidden value=\"EMOL_LOGIN\" name=\"EMOL_LOGIN\">";
+                echo "<input type=\"hidden\" value=\"EMOL_LOGIN\" name=\"EMOL_LOGIN\">";
                 echo "<input type=\"text\" class=\"emol-text-input\" value=\"".EMOL_LOGIN_USER."\" onfocus=\"if(this.value == '".EMOL_LOGIN_USER."'){this.value='';}\" name=\"username\"><br>";
                 echo "<input type=\"password\" class=\"emol-text-input\" value=\"".EMOL_LOGIN_PASS."\" onfocus=\"if(this.value == '".EMOL_LOGIN_PASS."'){this.value='';}\" name=\"password\">";
-                echo "<hr class=\"emol-hr\"><div class=\"emol-button-pos-search\"><button type=\"submit\">".EMOL_MENU_LOGIN."</button>";
-                echo "</form></div>";
+                echo "<div class=\"emol-submit-wrapper\"><button type=\"submit\">".EMOL_MENU_LOGIN."</button>";
+                echo "</div></form>";
 
             }
             

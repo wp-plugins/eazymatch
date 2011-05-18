@@ -10,7 +10,7 @@
     
     /**jobsearch **/
     define('EMOL_JOBSEARCH_TOTAL'         ,'Totaal aantal vacatures: ');
-    define('EMOL_JOBSEARCH_MORE'         ,'Meer vacatures? klik hier. ');
+    define('EMOL_JOBSEARCH_MORE'         ,'Alle vacatures');
     define('EMOL_JOBSEARCH_APPLY'         ,'direct solliciteren ');
     
     /**jobcvsearch **/

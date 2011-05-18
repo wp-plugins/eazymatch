@@ -8,7 +8,7 @@ if(!isset($emol_db_version)) { exit(); }
 function eazymatch_get_jobs(){
     global $emol_side;
     $emol_side='applicant';
-
+    
     $api  = eazymatch_connect();
 
     if( $api ){
@@ -62,7 +62,7 @@ function eazymatch_get_jobs(){
                 $text .= '<div class="eazymatch_job_title"><a href="'.$job_url.'">'.$job['name'].'</a></div>';
                 if($descVisible == 1) $text .= '<div class="eazymatch_job_body">'.$job['description'].'</div>';
                 if($regioVisible == 1 && isset($job['Address']['Region'])) $text .= '<div class="eazymatch_job_region">'.$job['Address']['Region']['name'].'</div>';
-                $text .= '<div class="eazymatch_job_toolbar"><a href="'.$job_url.'">'.EMOL_SEARCH_READMORE.'</a> | <a href="'.$apply_url.'">'.EMOL_JOBSEARCH_APPLY.'</a> </div>';
+                $text .= '<div class="eazymatch_job_toolbar"><a href="'.$apply_url.'">'.EMOL_JOBSEARCH_APPLY.'</a> | <a href="'.$job_url.'">'.EMOL_SEARCH_READMORE.'</a></div>';
                 $text .= '<div class="eazymatch_result_seperator"></div>';
             }
             $text .= '<div class="emol-pagnation-readmore"><a href="/'.get_option( 'emol_job_search_url' ).'/all/">'.EMOL_JOBSEARCH_MORE.'</a></div>';
@@ -194,6 +194,12 @@ function eazymatch_short_tags($atts) {
             $return = eazymatch_get_cv();
             break;	
     }
+    
+    if ( !empty( $return ) ){
+	    // make sure the basic style/scripts are included
+	    emol_require::all();
+    }
+    
     return $return;
 }
 //add shortcodes

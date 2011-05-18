@@ -11,7 +11,6 @@
 
         /** @see WP_Widget::widget */
         function widget($args, $instance) {
-
             global $emol_side;
 
             extract( $args );
@@ -59,15 +58,11 @@
             }
             
             echo '<div class="emol_widget" id="emol_search_widget">';
-             
-            echo '<div class="emol-reset-button">
-            <a href="/'.get_option( 'emol_job_search_url' ).'/all/">'.$reset.'</a>
-            </div>';
-
+            
             echo '<div class="emol-free-search">
-            <h3>'.EMOL_WIDGET_FREE_SEARCH.'</h3>
+            <label for="emol-free-search-input">'.EMOL_WIDGET_FREE_SEARCH.'</label>
             <input type="text" value="'. urldecode(emol_session::get('freeSearch'))  .'" class="emol-text-input" name="emol-free-search" id="emol-free-search-input" /> 
-            ';
+            </div>';
             
             //checked values
             $val5='';
@@ -94,20 +89,21 @@
             <option value="50" '.$val50.'>50 '.EMOL_KM.'</option>
             </select>';
             
-            
             echo '<div class="emol-location-search">
-            <h3>'.EMOL_WIDGET_LOCATION_SEARCH.'</h3>
-            <input type="text" value="'. urldecode(emol_session::get('locationSearchZipcode'))  .'" class="emol-text-input" name="emol-zipcode-search" id="emol-zipcode-search-input" /> 
-            '.$rangeBox.'
-            <hr class="emol-hr" />
-            <div align="right">
-                <button onclick="emolSearch(\'/'.$setUrl.'/\');">'.$searchLabel.'</button>
-            </div>
+            	<label for="emol-zipcode-search-input">'.EMOL_WIDGET_LOCATION_SEARCH.'</label>
+	            <input type="text" value="'. urldecode(emol_session::get('locationSearchZipcode'))  .'" class="emol-text-input" name="emol-zipcode-search" id="emol-zipcode-search-input" /> 
+	            '.$rangeBox.'
             </div>';
-
+            
             if( isset( $lists->lists ) )
                 echo $lists->lists;
-            
+                
+            echo '
+            <div class="emol-submit-wrapper">
+            	<span class="emol-reset-button"><a href="/'.get_option( 'emol_job_search_url' ).'/all/">'.$reset.'</a></span>
+            	<button onclick="emolSearch(\'/'.$setUrl.'/\');">'.$searchLabel.'</button>
+            </div>';
+
             echo "</div>";
             
             echo $after_widget;
