@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: EazyMatch 
-Plugin URI: http://wordpress.eazymatch.net
-Description: This Plugin integrates EazyMatch in your Wordpress website.
-Version: 1.3
+Plugin URI: http://wordpress.org/extend/plugins/eazymatch/
+Description: Plugin to enable an EazyMatch frontent on your website. EazyMatch is a SOAP based service for recruitment companys
+Version: 1.3.1
 Author: EazyMatch
 Author URI: http://www.eazymatch.net
 License: GPL2
@@ -31,7 +31,7 @@ License: GPL2
 	//set version
 	global $emol_side;
 	global $emol_db_version;
-	$emol_db_version = "1.2.2";
+	$emol_db_version = "1.3.1";
 	
 	global $emol_isDebug;
 	$emol_isDebug = false;
